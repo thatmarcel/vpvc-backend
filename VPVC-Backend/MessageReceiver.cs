@@ -15,7 +15,6 @@ public static class MessageReceiver {
         { MessageTypes.partyJoin, new PartyJoinMessageHandler() },
         { MessageTypes.partyCreate, new PartyCreateMessageHandler() },
         { MessageTypes.selfStateUpdate, new SelfStateUpdateMessageHandler() },
-        { MessageTypes.outgoingWebRtcSignalingMessage, new OutgoingWebRtcSignalingMessageHandler() },
         { MessageTypes.changeTeam, new ChangeTeamMessageHandler() }
     };
 

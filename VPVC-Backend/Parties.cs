@@ -8,6 +8,8 @@ public static class Parties {
     public static List<Party> all = new();
     public static Dictionary<Guid, Party> forSocketIds = new();
 
+    private static Timer? participantStatesUpdateTimer;
+
     public static Party? PartyWithId(string partyId) {
         return all.FirstOrDefault(party => party.id == partyId);
     }
@@ -194,7 +196,7 @@ public static class Parties {
     }
 
     public static void SetupParticipantStatesUpdateTimer() {
-        _ = new Timer(_ => {
+        participantStatesUpdateTimer = new Timer(_ => {
             try {
                 SendParticipantStatesUpdates();
             } catch (Exception exception) {
