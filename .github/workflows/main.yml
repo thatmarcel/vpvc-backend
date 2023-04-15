@@ -1,0 +1,36 @@
+on:
+    push:
+        branches:
+        - main
+env:
+    DOTNET_VERSION: 7
+
+jobs:
+    publish-executable:
+        name: Publish executable
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v3
+        -
+            name: Setup .NET Core
+            uses: actions/setup-dotnet@v3
+            with:
+                dotnet-version: ${{ env.DOTNET_VERSION }}
+        -
+            name: Fetch dependencies
+            run: dotnet restore
+        -
+            name: Build project
+            run: cd VPVC-Backend && dotnet publish -r linux-x64 -c Release --self-contained true -p:PublishSingleFile=true -o ../build-output
+        -
+            name: Prepare upload
+            run: mkdir -p ./internal/backend/executables/ && mv ./build-output/VPVC-Backend ./internal/backend/executables/
+        -
+            name: Upload to CDN
+            uses: Snider/bunnycdn-gh-action@v2.0.1
+            with:
+                source: "./internal"
+                storageZoneName: ${{ env.BUNNY_CDN_STORAGE_ZONE_NAME }}
+                accessKey: ${{ secrets.BUNNY_CDN_STORAGE_ZONE_KEY }}
+                zoneId: ${{ secrets.BUNNY_CDN_PULL_ZONE_ID }}
+                zoneKey: ${{ secrets.BUNNY_CDN_PULL_ZONE_KEY }}
