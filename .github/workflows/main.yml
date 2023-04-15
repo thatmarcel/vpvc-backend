@@ -30,7 +30,7 @@ jobs:
             uses: ayeressian/bunnycdn-storage-deploy@v1.1.1
             with:
                 source: "./internal"
-                storageZoneName: ${{ env.BUNNY_CDN_STORAGE_ZONE_NAME }}
+                storageZoneName: ${{ secrets.BUNNY_CDN_STORAGE_ZONE_NAME }}
                 accessKey: ${{ secrets.BUNNY_CDN_STORAGE_ZONE_KEY }}
                 pullZoneId: ${{ secrets.BUNNY_CDN_PULL_ZONE_ID }}
                 pullZoneAccessKey: ${{ secrets.BUNNY_CDN_PULL_ZONE_KEY }}
