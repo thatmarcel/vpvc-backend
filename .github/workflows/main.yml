@@ -27,10 +27,12 @@ jobs:
             run: mkdir -p ./internal/backend/executables/ && mv ./build-output/VPVC-Backend ./internal/backend/executables/
         -
             name: Upload to CDN
-            uses: Snider/bunnycdn-gh-action@v2.0.1
+            uses: ayeressian/bunnycdn-storage-deploy@v1.1.1
             with:
                 source: "./internal"
                 storageZoneName: ${{ env.BUNNY_CDN_STORAGE_ZONE_NAME }}
                 accessKey: ${{ secrets.BUNNY_CDN_STORAGE_ZONE_KEY }}
-                zoneId: ${{ secrets.BUNNY_CDN_PULL_ZONE_ID }}
-                zoneKey: ${{ secrets.BUNNY_CDN_PULL_ZONE_KEY }}
+                pullZoneId: ${{ secrets.BUNNY_CDN_PULL_ZONE_ID }}
+                pullZoneAccessKey: ${{ secrets.BUNNY_CDN_PULL_ZONE_KEY }}
+                remove: "true"
+                purge: "true"
