@@ -15,11 +15,7 @@ public static class Parties {
     }
 
     public static Party? PartyForSocketId(Guid socketId) {
-        if (forSocketIds.ContainsKey(socketId)) {
-            return forSocketIds[socketId];
-        } else {
-            return null;
-        }
+        return forSocketIds.GetValueOrDefault(socketId);
     }
     
     public static Party CreateParty() {
