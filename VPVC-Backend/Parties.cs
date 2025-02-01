@@ -1,4 +1,5 @@
-﻿using VPVC_Backend.Shared;
+﻿using System.Security.Cryptography;
+using VPVC_Backend.Shared;
 using VPVC_Backend.Shared.ProtobufMessages;
 using VPVC_Backend.Shared.ProtobufMessages.ServerToClient;
 
@@ -26,8 +27,10 @@ public static class Parties {
         if (all.FirstOrDefault(party => party.id == partyId || party.joinCode == partyJoinCode) != null) {
             return CreateParty();
         }
+        
+        var voiceChatEncryptionKey = Aes.Create().Key;
 
-        var party = new Party(partyId, partyJoinCode);
+        var party = new Party(partyId, partyJoinCode, voiceChatEncryptionKey);
         
         all.Add(party);
 

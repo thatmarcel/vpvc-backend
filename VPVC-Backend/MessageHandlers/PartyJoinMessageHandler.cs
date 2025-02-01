@@ -35,7 +35,8 @@ public class PartyJoinMessageHandler: IMessageHandler {
             partyJoinResultMessageContent = new PartyJoinResultMessageContent {
                 success = true,
                 partyParticipantSelf = partyParticipantSelf.ToSerializable(),
-                partyParticipants = partyParticipants.Select(participant => participant.ToSerializable()).ToList()
+                partyParticipants = partyParticipants.Select(participant => participant.ToSerializable()).ToList(),
+                voiceChatEncryptionKey = party.voiceChatEncryptionKey
             }
         };
             

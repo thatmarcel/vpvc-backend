@@ -31,7 +31,8 @@ public class PartyCreateMessageHandler: IMessageHandler {
             partyCreateResultMessageContent = new PartyCreateResultMessageContent {
                 success = true,
                 partyJoinCode = party.joinCode,
-                partyParticipantSelf = party.participants[0].ToSerializable()
+                partyParticipantSelf = party.participants[0].ToSerializable(),
+                voiceChatEncryptionKey = party.voiceChatEncryptionKey
             }
         };
         
